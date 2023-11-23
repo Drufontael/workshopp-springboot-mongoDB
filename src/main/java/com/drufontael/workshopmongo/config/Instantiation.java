@@ -2,6 +2,7 @@ package com.drufontael.workshopmongo.config;
 
 import com.drufontael.workshopmongo.domain.Post;
 import com.drufontael.workshopmongo.domain.User;
+import com.drufontael.workshopmongo.dto.AuthorDTO;
 import com.drufontael.workshopmongo.repository.PostRepository;
 import com.drufontael.workshopmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class Instantiation implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(maria,alex,bob));
 
         Post post1 = new Post(null, LocalDate.parse("21/03/2018",formatter),"Partiu viagem","Vou viajar " +
-                "para São Paulo. Abraços",maria);
+                "para São Paulo. Abraços",new AuthorDTO(maria));
         Post post2 = new Post(null,LocalDate.parse("21/03/2018",formatter),"Bom dia","Acordei feliz hoje!",
-                maria);
+                new AuthorDTO(maria));
         postRepository.saveAll(Arrays.asList(post1,post2));
     }
 }
