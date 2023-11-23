@@ -1,5 +1,6 @@
 package com.drufontael.workshopmongo.resources;
 
+import com.drufontael.workshopmongo.domain.Post;
 import com.drufontael.workshopmongo.domain.User;
 import com.drufontael.workshopmongo.dto.UserDTO;
 import com.drufontael.workshopmongo.services.UserService;
@@ -49,5 +50,11 @@ public class UserResource {
         obj.setId(id);
         service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @RequestMapping(value = "/{id}/posts",method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
