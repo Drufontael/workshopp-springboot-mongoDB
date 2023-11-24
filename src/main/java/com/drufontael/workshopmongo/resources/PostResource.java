@@ -3,6 +3,7 @@ package com.drufontael.workshopmongo.resources;
 import com.drufontael.workshopmongo.domain.Post;
 import com.drufontael.workshopmongo.domain.User;
 import com.drufontael.workshopmongo.dto.UserDTO;
+import com.drufontael.workshopmongo.resources.util.URL;
 import com.drufontael.workshopmongo.services.PostService;
 import com.drufontael.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,13 @@ public class PostResource {
     public ResponseEntity<Post> findById(@PathVariable String id){
             Post post = service.findById(id);
             return ResponseEntity.ok().body(post);
+    }
+
+    @GetMapping("/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text",defaultValue = "") String text){
+        String decodeText= URL.decodeParam(text);
+        List<Post> list=service.findByTitle(decodeText);
+        return ResponseEntity.ok(list);
     }
 
 }
