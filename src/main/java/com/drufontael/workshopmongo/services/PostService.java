@@ -1,14 +1,12 @@
 package com.drufontael.workshopmongo.services;
 
 import com.drufontael.workshopmongo.domain.Post;
-import com.drufontael.workshopmongo.domain.User;
-import com.drufontael.workshopmongo.dto.UserDTO;
 import com.drufontael.workshopmongo.repository.PostRepository;
-import com.drufontael.workshopmongo.repository.UserRepository;
 import com.drufontael.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -29,6 +27,10 @@ public class PostService {
 
     public List<Post> findByTitle(String text){
         return repository.searchByTitle(text);
+    }
+
+    public List<Post> fullSearch(String text, LocalDate minDate, LocalDate maxDate){
+       return repository.fullSearch(text,minDate,maxDate);
     }
 
 }
